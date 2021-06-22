@@ -15,31 +15,17 @@ class FileWatcher extends EventEmitter {
         super();
     }
 
-    watchfolder(text, path) {
-        let that = this;
-        // this will read the directory once
-        this.readDirectory(text, path);
-
-        // // this will be triggered once an update happened
-        // fs.watch(path, { persistent: true }, function (event, fileName) {
-        //     const completePath = path + '\\' + fileName;
-        //     // console.log(event);
-        //     // console.log(completePath);
-        //     that.readFiles(fileName, path, text);
-        // });
-    };
-
     readFiles(fileName, path, text) {
         let that = this;
         fs.readFile(path + '\\' + fileName, 'utf-8', function (err, data) {
-            if (data) // data is the content of the file
-                console.log(data);
-            if (err) {
-                console.error(err);
-                return;
-            }
+            // if (data) // content of the file
+            //     console.log(data);
+            // if (err) {
+            //     console.error(err);
+            //     return;
+            // }
             if (data && data.toString().toLowerCase().indexOf(text) > -1) {
-                that.emit("nameFoundOnFile", fileName);
+                that.emit("nameFoundOnFile",path + '\\' + fileName);
             }
         });
     };
@@ -47,11 +33,11 @@ class FileWatcher extends EventEmitter {
     readDirectory(text, path) {
         let that = this;
         fs.readdir(path, function (err, fileNames) {
-            console.log(fileNames);
-            if (err) {
-                console.error(err);
-                return;
-            }
+            // console.log(fileNames);
+            // if (err) {
+            //     console.error(err);
+            //     return;
+            // }
 
             fileNames.forEach(function (fileName) {
                 if (fs.lstatSync(path + '\\' + fileName).isDirectory()) {
@@ -65,13 +51,14 @@ class FileWatcher extends EventEmitter {
             });
 
             fs.watch(path, { persistent: true }, function (event, fileName) {
-                const completePath = path + '\\' + fileName;
-                // console.log(event);
-                // console.log(completePath);
                 that.readFiles(fileName, path, text);
             });
         });
-    }
+    };
+    
+    watchfolder(text, path) {
+        this.readDirectory(text, path);
+    };
 }
 
 const nameParam = argv.name;
@@ -85,13 +72,11 @@ else {
     const fileWatcher = new FileWatcher();
 
     fileWatcher.on("nameFoundOnFile", fileName => {
-        // console.log('inside nameFoundOnFile');
         fileWatcher.emit("openToastNotification", fileName);
         fileWatcher.emit("printToConsole", fileName);
     });
 
     fileWatcher.on("openToastNotification", fileName => {
-        //console.log('inside openToastNotification');
         notifier.notify({
             title: 'File Watcher',
             message: `Your name was mentioned on file: ${fileName}!`
