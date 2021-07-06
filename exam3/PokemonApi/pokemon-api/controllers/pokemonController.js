@@ -41,3 +41,17 @@ exports.handlePostRequest = (req, res) => {
         res.end();
     });
 };
+
+// avi todo
+exports.handlePutRequest = (req, res) => {
+    
+    res.write('update called');
+    res.end();
+};
+
+// avi todo
+exports.handleDeleteRequest = (req, res) => {
+
+    res.write('delete called');
+    res.end();
+};

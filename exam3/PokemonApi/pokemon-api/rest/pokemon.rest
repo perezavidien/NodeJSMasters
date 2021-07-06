@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 
-/// Weekly Exam Assertions
+/// Weekly Exam Assertions // avi todo
 
 ### Get Lucario
 GET http://localhost:3000/pokemons?name=lucario
@@ -45,6 +45,9 @@ GET http://localhost:3000/pokemons?name=tyranitar
 
 ### Get Latios
 GET http://localhost:3000/pokemons?name=latios
+
+
+
 
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Tyranitar
@@ -85,6 +88,7 @@ Content-Type: application/json
 }
 
 ### Update - Update will fail, type property is blank
+// ER: error
 PUT http://localhost:3000/pokemons?name=Milotic
 Content-Type: application/json
 
@@ -94,6 +98,8 @@ Content-Type: application/json
 }
 
 ### Update - Update will fail, Talonflame is missing
+// ER: error 
+// check name before delete
 PUT http://localhost:3000/pokemons?name=Talonflame
 Content-Type: application/json
 
