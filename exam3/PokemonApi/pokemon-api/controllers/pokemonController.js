@@ -2,8 +2,14 @@ const { pokemonService } = require('../services');
 const url = require('url');
 
 exports.handleGetRequest = (req, res) => {
-    const data = pokemonService.get();
+    console.log(req.url);
+    console.log(req.method);
+    console.log(req.statusCode);
 
+    //get the query param name value
+    //then pass to this get()
+
+    const data = pokemonService.get('Lucario');
     const result = { data };
 
     res.writeHead(200, {
@@ -44,7 +50,7 @@ exports.handlePostRequest = (req, res) => {
 
 // avi todo
 exports.handlePutRequest = (req, res) => {
-    
+
     res.write('update called');
     res.end();
 };
