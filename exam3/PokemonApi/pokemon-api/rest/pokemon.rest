@@ -54,13 +54,20 @@ GET http://localhost:3000/pokemons?name=avi
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Tyranitar
 
+### Get all
+GET http://localhost:3000/pokemons
+
+
+### Delete
+DELETE http://localhost:3000/pokemons?name=Abibi
+
 ### Update - Should update Lucario
 PUT http://localhost:3000/pokemons?name=Lucario
 Content-Type: application/json
 
 {
-	"type": "Fighting",
-	"generation": "3"
+	"type": "Fighting", //mandatory
+	"generation": "3" // optional
 }
 
 ### Create Milotic
@@ -78,7 +85,7 @@ PUT http://localhost:3000/pokemons?name=Milotic
 Content-Type: application/json
 
 {
-	"type": "Fire"
+	"type": "Fire" //sucess false, msg:  type is required
 }
 
 ### Update - Update fail, type property is missing
@@ -106,7 +113,7 @@ PUT http://localhost:3000/pokemons?name=Talonflame
 Content-Type: application/json
 
 {
-	"type": "Fire-Flying",
+	"type": "Fire-Flying", //fail, name doesnt exist
 	"generation": "4"
 }
 

@@ -53,7 +53,15 @@ exports.handlePutRequest = (req, res) => {
 
 // avi todo
 exports.handleDeleteRequest = (req, res) => {
+    const queryObject = url.parse(req.url, true).query;
+    const nameParam = queryObject?.name;
 
-    res.write('delete called');
+    const data = pokemonService.delete(nameParam);
+    const result = { data };
+
+    res.writeHead(200, {
+        'Content-Type': 'application/json',
+    });
+    res.write(JSON.stringify(result));
     res.end();
 };

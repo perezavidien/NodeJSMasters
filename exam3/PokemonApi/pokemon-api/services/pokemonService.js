@@ -5,6 +5,29 @@ const db = lowdb(adapter);
 
 db.defaults({ pokemons: [] }).write();
 
+const getByName = name => {
+    if (name) {
+        const LowercaseName = name.trim().toLowerCase();
+        const pokemon =
+            db.get('pokemons')
+                .value()
+                .filter((_) => _.name.trim().toLowerCase() === LowercaseName);
+
+        if (pokemon.length > 0) {
+            return {
+                success: true,
+                data: pokemon[0]
+            };
+        }
+        else {
+            return {
+                success: false,
+                errorMessage: `Pokemon '${name}' does not exist.`,
+            };
+        }
+    }
+}
+
 exports.get = (name) => {
     if (!name) {
         const pokemons = db.get('pokemons').value();
@@ -74,6 +97,32 @@ exports.update = (pokemon) => {
         return pokemonNotFound;
 
     db.get('pokemons').update(pokemon).write();
+
+    return {
+        success: true,
+    };
+};
+
+exports.delete = (name) => {
+    const result = getByName(name);
+    const { success, data } = result;
+
+    if (!success) {
+        //return error
+        return result;
+    }
+
+    const pokemons = db.get('pokemons').value();
+
+    console.log(pokemons);
+    const allExcept = pokemons.filter(_ => _.name !== data.name);
+    console.log(data); //object
+    console.log(pokemons); //array of objects
+    console.log(allExcept);
+
+    db.set('pokemons', allExcept).value();
+
+    console.log(pokemons);
 
     return {
         success: true,
