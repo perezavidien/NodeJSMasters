@@ -49,17 +49,27 @@ GET http://localhost:3000/pokemons?name=laTioS
 ### Get not existing data
 GET http://localhost:3000/pokemons?name=avi
 
-
-
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Tyranitar
 
 ### Get all
 GET http://localhost:3000/pokemons
 
+### Create Tyranitar
+POST http://localhost:3000/pokemons
+Content-Type: application/json
+
+{ 
+	"name": "Tyranitar", 
+	"type": "Rock-Dark", 
+	"genaration": "2" 
+}
 
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Abibi
+
+
+//TODO:
 
 ### Update - Should update Lucario
 PUT http://localhost:3000/pokemons?name=Lucario

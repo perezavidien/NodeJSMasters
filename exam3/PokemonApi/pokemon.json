@@ -6,14 +6,14 @@
       "generation": "4"
     },
     {
-      "name": "Tyranitar",
-      "type": "Rock-Dark",
-      "genaration": "2"
-    },
-    {
       "name": "Latios",
       "type": "Dragon-Psychic",
       "generation": "3"
+    },
+    {
+      "name": "Tyranitar",
+      "type": "Rock-Dark",
+      "genaration": "2"
     }
   ]
 }
