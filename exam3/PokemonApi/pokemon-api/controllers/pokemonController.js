@@ -2,14 +2,10 @@ const { pokemonService } = require('../services');
 const url = require('url');
 
 exports.handleGetRequest = (req, res) => {
-    console.log(req.url);
-    console.log(req.method);
-    console.log(req.statusCode);
+    const queryObject = url.parse(req.url, true).query;
+    const nameParam = queryObject?.name;
 
-    //get the query param name value
-    //then pass to this get()
-
-    const data = pokemonService.get('Lucario');
+    const data = pokemonService.get(nameParam);
     const result = { data };
 
     res.writeHead(200, {

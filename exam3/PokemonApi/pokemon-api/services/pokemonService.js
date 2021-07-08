@@ -6,20 +6,18 @@ const db = lowdb(adapter);
 db.defaults({ pokemons: [] }).write();
 
 exports.get = (name) => {
-
-    console.log(name);
-
     if (!name) {
         const pokemons = db.get('pokemons').value();
         return pokemons;
     }
-    
+
+    name = name.trim().toLowerCase();
     const pokemon =
         db.get('pokemons')
             .value()
-            .filter((_) => _.name === name);
+            .filter((_) => _.name.trim().toLowerCase() === name);
 
-    console.log(pokemon);
+    //console.log(pokemon);
 
     if (pokemon.length > 0)
         return pokemon;

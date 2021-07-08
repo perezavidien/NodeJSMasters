@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 
-/// Weekly Exam Assertions // avi todo
+/// Weekly Exam Assertions
 
 ### Get Lucario
 GET http://localhost:3000/pokemons?name=lucario
