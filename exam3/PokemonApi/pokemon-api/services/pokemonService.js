@@ -113,16 +113,8 @@ exports.delete = (name) => {
     }
 
     const pokemons = db.get('pokemons').value();
-
-    console.log(pokemons);
     const allExcept = pokemons.filter(_ => _.name !== data.name);
-    console.log(data); //object
-    console.log(pokemons); //array of objects
-    console.log(allExcept);
-
-    db.set('pokemons', allExcept).value();
-
-    console.log(pokemons);
+    db.set('pokemons', allExcept).write();
 
     return {
         success: true,
