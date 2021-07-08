@@ -11,18 +11,21 @@ exports.get = (name) => {
         return pokemons;
     }
 
-    name = name.trim().toLowerCase();
+    const LowercaseName = name.trim().toLowerCase();
     const pokemon =
         db.get('pokemons')
             .value()
-            .filter((_) => _.name.trim().toLowerCase() === name);
+            .filter((_) => _.name.trim().toLowerCase() === LowercaseName);
 
-    //console.log(pokemon);
-
-    if (pokemon.length > 0)
+    if (pokemon.length > 0) {
         return pokemon;
-
-    //else return error
+    }
+    else {
+        return {
+            success: false,
+            errorMessage: `Pokemon '${name}' does not exist.`,
+        };
+    }
 };
 
 exports.insert = (pokemon) => {

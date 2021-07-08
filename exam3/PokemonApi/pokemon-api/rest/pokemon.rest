@@ -44,8 +44,10 @@ GET http://localhost:3000/pokemons?name=lucario
 GET http://localhost:3000/pokemons?name=tyranitar
 
 ### Get Latios
-GET http://localhost:3000/pokemons?name=latios
+GET http://localhost:3000/pokemons?name=laTioS
 
+### Get not existing data
+GET http://localhost:3000/pokemons?name=avi
 
 
 
