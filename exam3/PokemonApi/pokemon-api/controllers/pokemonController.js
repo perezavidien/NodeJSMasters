@@ -64,13 +64,13 @@ exports.handlePutRequest = (req, res) => {
 
         const result = pokemonService.update(nameParam, dataJson);
 
-        // if (!result.success) {
-        //     res.writeHead(400, {
-        //         'Content-Type': 'application/json',
-        //     });
-        //     res.write(JSON.stringify(result));
-        //     res.end();
-        // }
+        if (!result.success) {
+            res.writeHead(400, {
+                'Content-Type': 'application/json',
+            });
+            res.write(JSON.stringify(result));
+            res.end();
+        }
 
         res.writeHead(200, {
             'Content-Type': 'application/json',

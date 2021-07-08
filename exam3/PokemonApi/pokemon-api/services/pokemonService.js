@@ -13,20 +13,19 @@ const getByName = name => {
                 .value()
                 .filter((_) => _.name.trim().toLowerCase() === LowercaseName);
 
-        if (pokemon.length > 0) {
-            return {
-                success: true,
-                data: pokemon[0]
-            };
-        }
-        else {
+        if (pokemon.length === 0) {
             return {
                 success: false,
                 errorMessage: `Pokemon '${name}' does not exist.`,
             };
         }
+
+        return {
+            success: true,
+            data: pokemon[0]
+        };
     }
-}
+};
 
 exports.get = (name) => {
     if (!name) {
@@ -34,21 +33,15 @@ exports.get = (name) => {
         return pokemons;
     }
 
-    const LowercaseName = name.trim().toLowerCase();
-    const pokemon =
-        db.get('pokemons')
-            .value()
-            .filter((_) => _.name.trim().toLowerCase() === LowercaseName);
+    const result = getByName(name);
+    const { success, data } = result;
 
-    if (pokemon.length > 0) {
-        return pokemon;
+    if (!success) {
+        //return error if pokemon does not exist
+        return result;
     }
-    else {
-        return {
-            success: false,
-            errorMessage: `Pokemon '${name}' does not exist.`,
-        };
-    }
+
+    return data;
 };
 
 exports.insert = (pokemon) => {
@@ -131,6 +124,6 @@ exports.delete = (name) => {
     db.set('pokemons', allExcept).write();
 
     return {
-        success: true,
+        success: true
     };
 };
