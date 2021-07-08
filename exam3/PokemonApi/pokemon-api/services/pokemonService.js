@@ -16,7 +16,7 @@ const getByName = name => {
         if (pokemon.length === 0) {
             return {
                 success: false,
-                errorMessage: `Pokemon '${name}' does not exist.`,
+                errorMessage: 'Pokemon ' + name + ' does not exist.'
             };
         }
 
@@ -30,18 +30,13 @@ const getByName = name => {
 exports.get = (name) => {
     if (!name) {
         const pokemons = db.get('pokemons').value();
-        return pokemons;
+        return {
+            success: true,
+            data: pokemons
+        }
     }
 
-    const result = getByName(name);
-    const { success, data } = result;
-
-    if (!success) {
-        //return error if pokemon does not exist
-        return result;
-    }
-
-    return data;
+    return getByName(name);
 };
 
 exports.insert = (pokemon) => {
@@ -56,7 +51,7 @@ exports.insert = (pokemon) => {
     if (isPokemonExist) {
         return {
             success: false,
-            errorMessage: `Pokemon ${name} already exist.`,
+            errorMessage: `Pokemon ${name} already exists.`,
         };
     }
 

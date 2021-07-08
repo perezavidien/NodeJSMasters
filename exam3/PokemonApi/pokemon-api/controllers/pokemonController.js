@@ -5,8 +5,7 @@ exports.handleGetRequest = (req, res) => {
     const queryObject = url.parse(req.url, true).query;
     const nameParam = queryObject?.name;
 
-    const data = pokemonService.get(nameParam);
-    const result = { data };
+    const result = pokemonService.get(nameParam);
 
     res.writeHead(200, {
         'Content-Type': 'application/json',
@@ -34,13 +33,13 @@ exports.handlePostRequest = (req, res) => {
             });
             res.write(JSON.stringify(result));
             res.end();
+        } else {
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+            });
+            res.write(JSON.stringify(result));
+            res.end();
         }
-
-        res.writeHead(200, {
-            'Content-Type': 'application/json',
-        });
-        res.write(JSON.stringify(result));
-        res.end();
     });
 };
 
@@ -56,7 +55,7 @@ exports.handlePutRequest = (req, res) => {
         //type mandatory
         //generation optional
         //if type exists, update
-        
+
         const parsedData = Buffer.concat(data).toString();
         const dataJson = JSON.parse(parsedData);
         const queryObject = url.parse(req.url, true).query;
@@ -70,13 +69,13 @@ exports.handlePutRequest = (req, res) => {
             });
             res.write(JSON.stringify(result));
             res.end();
+        } else {
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+            });
+            res.write(JSON.stringify(result));
+            res.end();
         }
-
-        res.writeHead(200, {
-            'Content-Type': 'application/json',
-        });
-        res.write(JSON.stringify(result));
-        res.end();
     });
 };
 
@@ -91,11 +90,11 @@ exports.handleDeleteRequest = (req, res) => {
         });
         res.write(JSON.stringify(result));
         res.end();
+    } else {
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+        });
+        res.write(JSON.stringify(result));
+        res.end();
     }
-
-    res.writeHead(200, {
-        'Content-Type': 'application/json',
-    });
-    res.write(JSON.stringify(result));
-    res.end();
 };

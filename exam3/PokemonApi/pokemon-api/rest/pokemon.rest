@@ -46,9 +46,6 @@ GET http://localhost:3000/pokemons?name=tyranitar
 ### Get Latios
 GET http://localhost:3000/pokemons?name=laTioS
 
-### Get not existing data
-GET http://localhost:3000/pokemons?name=avi
-
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Tyranitar
 
@@ -67,11 +64,6 @@ Content-Type: application/json
 
 ### Delete
 DELETE http://localhost:3000/pokemons?name=Abibi
-
-
-
-
-
 
 ### Get all
 GET http://localhost:3000/pokemons
