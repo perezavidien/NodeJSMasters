@@ -74,32 +74,46 @@ exports.insert = (pokemon) => {
     };
 };
 
-exports.update = (pokemon) => {
-    const { name } = pokemon;
+exports.update = (name, body) => {
+    //validations
+    const { type, generation } = body
+    if (!type) {
+        return {
+            success: false,
+            errorMessage: `Type value is required.`
+        }
+    }
 
-    const pokemonNotFound = {
-        success: false,
-        errorMessage: `Pokemon do not exist.`,
-    };
+    //get  targeted pokemon
+    const result = getByName(name);
+    const { success, data } = result;
 
-    if (!name)
-        return pokemonNotFound;
+    if (!success) {
+        //return error if pokemon does not exist
+        return result;
+    }
 
-    const pokemonExists =
-        db
-            .get('pokemons')
-            .value()
-            .filter((_) => _.name === name).length > 0;
+    //update the values
 
-    console.log(pokemonExists); // ano laman nito
+    //type is mandatory
+    data.type = type;
+    //generation optional
+    if (generation !== undefined) {
+        data.generation = generation;
+    }
 
-    if (!pokemonExists)
-        return pokemonNotFound;
+    console.log(data);
 
-    db.get('pokemons').update(pokemon).write();
+    const pokemons = db
+        .get('pokemons')
+        .value()
+        .filter(_ => _.name !== data.name);
+
+    pokemons.push(data);
+    db.set('pokemons', pokemons).write();
 
     return {
-        success: true,
+        success: true
     };
 };
 
