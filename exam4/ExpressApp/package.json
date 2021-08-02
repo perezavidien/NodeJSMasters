@@ -1,5 +1,5 @@
 {
-  "name": "ExpressApp",
+  "name": "express_app",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -9,7 +9,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^0.21.1",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
-    "lowdb": "^2.1.0"
+    "lowdb": "^2.1.0",
+    "uuid": "^8.3.2",
+    "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "nodemon": "^2.0.12"
   }
 }
