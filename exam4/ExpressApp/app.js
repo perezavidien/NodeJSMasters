@@ -1,8 +1,7 @@
 
-import router from './routers/userRouter.js';
-import { handleError } from './helpers/errorHandler.js'
-
-var express = require('express');
+const router = require('./routers/userRouter.js');
+const { handleError } = require('./helpers/errorHandler.js');
+const express = require('express');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
