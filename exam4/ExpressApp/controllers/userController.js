@@ -1,9 +1,9 @@
-import Datastore from '../dataAccess/datastore.js.js';
-import Validator from 'validatorjs';
-import { ErrorHandler } from '../helpers/errorHandler.js'
-import { isDataExisting, displayResponse } from '../helpers/validators.js'
+const Datastore = require('../datastore/userDatastore.js');
+const Validator = require('validatorjs');
+const { ErrorHandler } = require('../helpers/errorHandler.js)');
+const { isDataExisting, displayResponse } = require('../helpers/validators.js');
 
-export const getAllUsers = async (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
     try {
         const dataStore = new Datastore()
         const users = await dataStore.getAllUsers();
@@ -18,7 +18,7 @@ export const getAllUsers = async (req, res, next) => {
 
 }
 
-export const getUserByUsername = async (req, res, next) => {
+const getUserByUsername = async (req, res, next) => {
     try {
         const dataStore = new Datastore()
         const { username } = req.params;
@@ -35,7 +35,7 @@ export const getUserByUsername = async (req, res, next) => {
 }
 
 
-export const getUserByEmailAddress = async (req, res, next) => {
+const getUserByEmailAddress = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { emailAddress } = req.params;
@@ -51,7 +51,7 @@ export const getUserByEmailAddress = async (req, res, next) => {
     }
 }
 
-export const createUser = async (req, res, next) => {
+const createUser = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { username, emailAddress } = req.body;
@@ -85,7 +85,7 @@ export const createUser = async (req, res, next) => {
     }
 }
 
-export const updateUser = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { username } = req.params;
@@ -121,7 +121,7 @@ export const updateUser = async (req, res, next) => {
 
 }
 
-export const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { username } = req.params;

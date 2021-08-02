@@ -1,14 +1,11 @@
-import lowdb from 'lowdb';
-import FileAsync from 'lowdb/adapters/FileAsync.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { v4 as uuid } from 'uuid';
-
-const moduleURL = path.dirname(fileURLToPath(import.meta.url));
-const dbAsync = lowdb(new FileAsync(path.join(moduleURL, 'db.json')));
+const lowdb = require('lowdb');
+const FileAsync = require('lowdb/adapters/FileAsync.js');
+const path = require('path');
+const { v4: uuid } = require('uuid');
+const dbAsync = lowdb(new FileAsync(path.join(__dirname, 'db.json')));
 
 
-export default class Datastore {
+class Datastore {
     constructor() {
         this.tableName = 'users';
         this.dbContext = dbAsync.then(db => {
