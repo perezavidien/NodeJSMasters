@@ -1,0 +1,64 @@
+###Get All Users GET http://localhost:3000/users
+
+### Get User by Username GET http://localhost:3000/users/user/MilyO
+
+### Get User by Username - return 404 username not existing GET http://localhost:3000/users/user/MilyOpena
+
+### Get User by Email Address GET http://localhost:3000/users/user/email/PaulJ@magenic.com
+
+### Get User by Username - return 404 username not existing GET http://localhost:3000/users/user/email/MilyOpena@gmail.com
+
+### Create User POST http://localhost:3000/users Content-Type: application/json
+
+{
+    "username": "tedMosby"
+    ,"emailAddress": "tedmosby@gmail.com" 
+    ,"firstName": "Ted" 
+    ,"lastName": "Mosby"
+
+}
+
+### Create User -- return 409 already exists POST http://localhost:3000/users Content-Type: application/json
+
+{
+    "username": "tedMosby"
+    ,"emailAddress": "tedmosby@gmail.com" 
+    ,"firstName": "Ted" 
+    ,"lastName": "Mosby"
+}
+
+### Create User -- return 400 invalid details POST http://localhost:3000/users Content-Type: application/json
+
+{
+    "username": 123123
+    ,"emailAddress": "robinscherbatsky@gmail"
+    ,"firstName": ""
+    ,"lastName": 123
+}
+
+### Update User PUT http://localhost:3000/users/user/tedMosby Content-Type: application/json
+
+{
+    "emailAddress": "tedMosby23@gmail.com"
+}
+
+### Update User -- return 400 invalid username in body PUT http://localhost:3000/users/user/tedMosby Content-Type: application/json
+
+{
+    "username": "tedMosby"
+    ,"emailAddress": "tedMosby23@gmail.com"
+    ,"firstName": ""
+    ,"lastName": ""
+}
+
+### Update User -- return 409 existing email address PUT http://localhost:3000/users/user/tedMosby Content-Type: application/json
+
+{
+    "emailAddress": "PaulJ@magenic.com"
+    ,"firstName": "Paul"
+    ,"lastName": "Jimenez"
+}
+
+### Delete User DELETE http://localhost:3000/users/user/tedMosby
+
+### Delete User - retrn 404 user not existing DELETE http://localhost:3000/users/user/tedMosby23
