@@ -38,6 +38,7 @@ export const getUserByEmailAddress = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { emailAddress } = req.params;
+        //console.log(req.params);
 
         const user = await dataStore.getByNameOrEmail('emailAddress', emailAddress);
 
@@ -52,8 +53,13 @@ export const getUserByEmailAddress = async (req, res, next) => {
 
 export const createUser = async (req, res, next) => {
     try {
+        //console.log(req.body);
+
         const dataStore = new Datastore();
         const { username, emailAddress } = req.body;
+
+        // console.log(username);
+        // console.log(emailAddress);
 
         const detailsByEmail = await dataStore
             .getByNameOrEmail('emailAddress', emailAddress);
@@ -65,7 +71,8 @@ export const createUser = async (req, res, next) => {
             emailAddress: 'required|email',
             firstName: 'required|string',
             lastName: 'required|string'
-        }
+        };
+
         const validation = new Validator(req.body, rules);
 
         if (isUserExisting(detailsByEmail) || isUserExisting(detailsByUsername)) {
