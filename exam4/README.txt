@@ -1,9 +1,10 @@
-To run exam 3:
+To run exam 4:
 * open CMD
-* go to /exm4/express
-* nodemon app.js
-* go to /rest/user.rest file
-* click on "Send Request" link of the route that you want to run
+* CD to ../exam4/ExpressApp
+* run npm install
+* run nodemon app.js
+* open ../ExpressApp/rest/user.rest file
+* run postman
 
 
 
