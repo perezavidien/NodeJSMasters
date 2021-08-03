@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "4ae03ef4-981a-4ae5-8437-fb6f467516a6",
+      "username": "PaulJ",
+      "emailAddress": "PaulJ@magenic.com",
+      "firstName": "Paul",
+      "lastName": "Jimenez"
+    },
+    {
+      "id": "bf0582f4-dd2e-4ed2-adfa-8ac0ca34acf0",
+      "username": "MilyO",
+      "emailAddress": "MilyO@magenic.com",
+      "firstName": "Mily",
+      "lastName": "Opena"
+    },
+    {
+      "id": "dd5c09d4-1417-466d-942e-e5c6d71ac57a",
+      "username": "abibi",
+      "emailAddress": "abibi@gmail.com",
+      "firstName": "Abi",
+      "lastName": "Bi"
+    }
+  ]
+}
