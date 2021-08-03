@@ -20,7 +20,7 @@ export const handleError = (error, res) => {
 const setErrorMessage = (status, defaultError) => {
     switch (status) {
         case 400:
-            return "Invalid details.";
+            return "Invalid details."
         case 404:
             return "Record does not exist.";
         case 409:

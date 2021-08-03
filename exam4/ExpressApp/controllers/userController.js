@@ -3,7 +3,7 @@ import Validator from 'validatorjs';
 import { ErrorHandler } from '../helpers/errorHandler.js'
 import { isUserExisting, displayResponse } from '../helpers/userValidators.js'
 
-export const getAllUsers = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
     try {
         const dataStore = new Datastore()
         const users = await dataStore.getAllUsers();
@@ -17,7 +17,7 @@ export const getAllUsers = async (req, res, next) => {
     }
 }
 
-export const getUserByUsername = async (req, res, next) => {
+export const getByUsername = async (req, res, next) => {
     try {
         const dataStore = new Datastore()
         const { username } = req.params;
@@ -34,7 +34,7 @@ export const getUserByUsername = async (req, res, next) => {
 }
 
 
-export const getUserByEmailAddress = async (req, res, next) => {
+export const getByEmailAddress = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { emailAddress } = req.params;
@@ -51,29 +51,25 @@ export const getUserByEmailAddress = async (req, res, next) => {
     }
 }
 
-export const createUser = async (req, res, next) => {
+export const create = async (req, res, next) => {
     try {
         //console.log(req.body);
-
         const dataStore = new Datastore();
         const { username, emailAddress } = req.body;
-
-        // console.log(username);
-        // console.log(emailAddress);
 
         const detailsByEmail = await dataStore
             .getByNameOrEmail('emailAddress', emailAddress);
         const detailsByUsername = await dataStore
             .getByNameOrEmail('username', username);
 
-        const rules = {
+        const validtionRules = {
             username: 'required|string',
             emailAddress: 'required|email',
             firstName: 'required|string',
             lastName: 'required|string'
         };
 
-        const validation = new Validator(req.body, rules);
+        const validation = new Validator(req.body, validtionRules);
 
         if (isUserExisting(detailsByEmail) || isUserExisting(detailsByUsername)) {
             throw new ErrorHandler(409);
@@ -94,7 +90,7 @@ export const createUser = async (req, res, next) => {
     }
 }
 
-export const updateUser = async (req, res, next) => {
+export const updateByUsername = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { username } = req.params;
@@ -131,18 +127,17 @@ export const updateUser = async (req, res, next) => {
     catch (err) {
         next(err)
     }
-
 }
 
-export const deleteUser = async (req, res, next) => {
+export const deleteByUsername = async (req, res, next) => {
     try {
         const dataStore = new Datastore();
         const { username } = req.params;
 
-        const detailsByUsername = await dataStore
+        const user = await dataStore
             .getByNameOrEmail('username', username);
 
-        if (!isUserExisting(detailsByUsername)) {
+        if (!isUserExisting(user)) {
             throw new ErrorHandler(404);
         }
 
